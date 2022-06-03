@@ -1,8 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
+const config = require('./config.json');
 const port = process.env.PORT||8000;
 
+const apikey = config.APIKEY;
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -14,7 +16,10 @@ app.get('/', (req, res) => {
 });
 
 app.post('/', (req, res) => {
-    res.send("Email transfer successful!");
+
+    const {name, email, message} = req.body;
+    console.log(email);
+    res.send('Email send successfully.')
 });
 
 app.listen(port, () => {
